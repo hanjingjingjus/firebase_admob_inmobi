@@ -84,7 +84,7 @@ public class FirebaseAdMobPlugin implements FlutterPlugin, ActivityAware, Method
         }
         MobileAds.initialize(applicationContext, appId);
 
-        //optional 欧盟广告协议
+        //optional 欧盟广告协议 加载广告前
         JSONObject consentObject = new JSONObject();
         try {
             consentObject.put(InMobiSdk.IM_GDPR_CONSENT_AVAILABLE, true);
