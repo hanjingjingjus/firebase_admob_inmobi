@@ -44,7 +44,7 @@ enum MobileAdGender {
 }
 
 /// Signature for a [MobileAd] status change callback.
-typedef void MobileAdListener(MobileAdEvent event);
+typedef void MobileAdListener(MobileAdEvent event, {String adResource});
 
 /// Targeting info per the native AdMob API.
 ///
@@ -346,7 +346,7 @@ enum RewardedVideoAdEvent {
 /// configured for the AdMob ad unit when it was created. They will be null for
 /// all other events.
 typedef void RewardedVideoAdListener(RewardedVideoAdEvent event,
-    {String rewardType, int rewardAmount});
+    {String rewardType, int rewardAmount, String adResource});
 
 /// An AdMob rewarded video ad.
 ///
@@ -502,14 +502,19 @@ class FirebaseAdMob {
     final Map<dynamic, dynamic> argumentsMap = call.arguments;
     final RewardedVideoAdEvent rewardedEvent =
         _methodToRewardedVideoAdEvent[call.method];
+    print(
+        '_handleMethod${call.method},${argumentsMap.keys},${argumentsMap.values}');
+
     if (rewardedEvent != null) {
       if (RewardedVideoAd.instance.listener != null) {
         if (rewardedEvent == RewardedVideoAdEvent.rewarded) {
           RewardedVideoAd.instance.listener(rewardedEvent,
               rewardType: argumentsMap['rewardType'],
-              rewardAmount: argumentsMap['rewardAmount']);
+              rewardAmount: argumentsMap['rewardAmount'],
+              adResource: argumentsMap['adResource']);
         } else {
-          RewardedVideoAd.instance.listener(rewardedEvent);
+          RewardedVideoAd.instance
+              .listener(rewardedEvent, adResource: argumentsMap['adResource']);
         }
       }
     } else {
@@ -518,7 +523,7 @@ class FirebaseAdMob {
         final MobileAd ad = MobileAd._allAds[id];
         final MobileAdEvent mobileAdEvent = _methodToMobileAdEvent[call.method];
         if (mobileAdEvent != null && ad.listener != null) {
-          ad.listener(mobileAdEvent);
+          ad.listener(mobileAdEvent, adResource: argumentsMap['adResource']);
         }
       }
     }

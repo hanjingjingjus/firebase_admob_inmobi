@@ -7,6 +7,7 @@ package io.flutter.plugins.firebaseadmob;
 import android.os.Bundle;
 import android.util.Log;
 import com.google.ads.mediation.admob.AdMobAdapter;
+import com.google.ads.mediation.inmobi.InMobiAdapter;
 import com.google.android.gms.ads.AdRequest;
 import java.util.ArrayList;
 import java.util.Date;
@@ -124,7 +125,9 @@ class AdRequestBuilderFactory {
       extras.putString("npa", "1");
       builder.addNetworkExtrasBundle(AdMobAdapter.class, extras);
     }
+    builder.addNetworkExtrasBundle(InMobiAdapter.class, new Bundle());
 
+    builder.addTestDevice("96D0FB38E235F49AEF279BD6150F619B");
     return builder;
   }
 }
