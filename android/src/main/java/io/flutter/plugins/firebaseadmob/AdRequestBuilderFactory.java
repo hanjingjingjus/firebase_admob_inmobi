@@ -127,7 +127,6 @@ class AdRequestBuilderFactory {
     }
     builder.addNetworkExtrasBundle(InMobiAdapter.class, new Bundle());
 
-    builder.addTestDevice("96D0FB38E235F49AEF279BD6150F619B");
     return builder;
   }
 }
