@@ -93,7 +93,7 @@ public class FirebaseAdMobPlugin implements FlutterPlugin, ActivityAware, Method
             exception.printStackTrace();
         }
         InMobiConsent.updateGDPRConsent(consentObject);
-
+        InMobiSdk.setLogLevel(InMobiSdk.LogLevel.DEBUG);
         result.success(Boolean.TRUE);
     }
 

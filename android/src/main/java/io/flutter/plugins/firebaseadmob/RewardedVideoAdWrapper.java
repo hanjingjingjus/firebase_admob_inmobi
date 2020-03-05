@@ -27,40 +27,40 @@ public class RewardedVideoAdWrapper implements RewardedVideoAdListener {
     @Override
     public void onRewardedVideoAdLoaded() {
         status = Status.LOADED;
-        channel.invokeMethod("onRewardedVideoAdLoaded", argumentsMap("adResource", rewardedInstance.getMediationAdapterClassName()));
+        channel.invokeMethod("onRewardedVideoAdLoaded", argumentsMap("adResource", getMediationAdapterClassName()));
     }
 
     @Override
     public void onRewardedVideoAdOpened() {
-        channel.invokeMethod("onRewardedVideoAdOpened", argumentsMap("adResource", rewardedInstance.getMediationAdapterClassName()));
+        channel.invokeMethod("onRewardedVideoAdOpened", argumentsMap("adResource", getMediationAdapterClassName()));
     }
 
     @Override
     public void onRewardedVideoStarted() {
-        channel.invokeMethod("onRewardedVideoStarted", argumentsMap("adResource", rewardedInstance.getMediationAdapterClassName()));
+        channel.invokeMethod("onRewardedVideoStarted", argumentsMap("adResource", getMediationAdapterClassName()));
     }
 
     @Override
     public void onRewardedVideoAdClosed() {
         this.status = Status.CREATED;
-        channel.invokeMethod("onRewardedVideoAdClosed", argumentsMap("adResource", rewardedInstance.getMediationAdapterClassName()));
+        channel.invokeMethod("onRewardedVideoAdClosed", argumentsMap("adResource", getMediationAdapterClassName()));
     }
 
     @Override
     public void onRewardedVideoCompleted() {
-        channel.invokeMethod("onRewardedVideoCompleted", argumentsMap("adResource", rewardedInstance.getMediationAdapterClassName()));
+        channel.invokeMethod("onRewardedVideoCompleted", argumentsMap("adResource", getMediationAdapterClassName()));
     }
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
         channel.invokeMethod(
                 "onRewarded",
-                argumentsMap("rewardType", rewardItem.getType(), "rewardAmount", rewardItem.getAmount(), "adResource", rewardedInstance.getMediationAdapterClassName()));
+                argumentsMap("rewardType", rewardItem.getType(), "rewardAmount", rewardItem.getAmount(), "adResource", getMediationAdapterClassName()));
     }
 
     @Override
     public void onRewardedVideoAdLeftApplication() {
-        channel.invokeMethod("onRewardedVideoAdLeftApplication", argumentsMap("adResource", rewardedInstance.getMediationAdapterClassName()));
+        channel.invokeMethod("onRewardedVideoAdLeftApplication", argumentsMap("adResource", getMediationAdapterClassName()));
     }
 
     @Override
@@ -97,6 +97,14 @@ public class RewardedVideoAdWrapper implements RewardedVideoAdListener {
     public void show() {
         if (rewardedInstance.isLoaded()) {
             rewardedInstance.show();
+        }
+    }
+
+    public String getMediationAdapterClassName() {
+        try {
+            return rewardedInstance != null && rewardedInstance.isLoaded() ? rewardedInstance.getMediationAdapterClassName() : "";
+        } catch (Exception e) {
+            return "";
         }
     }
 

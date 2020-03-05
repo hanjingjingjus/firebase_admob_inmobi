@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.google.ads.mediation.inmobi.rtb.InMobiBannerAd;
+import com.google.ads.mediation.inmobi.rtb.InMobiInterstitialAd;
 import com.google.android.gms.ads.*;
 
 import io.flutter.plugin.common.MethodChannel;
@@ -97,7 +98,7 @@ abstract class MobileAd extends AdListener {
     public void onAdLoaded() {
         boolean statusWasPending = status == Status.PENDING;
         status = Status.LOADED;
-        channel.invokeMethod("onAdLoaded", argumentsMap());
+        channel.invokeMethod("onAdLoaded", argumentsMap("adResource", getAdForId(id).getMediationAdapterClassName()));
         if (statusWasPending) show();
     }
 
@@ -139,7 +140,11 @@ abstract class MobileAd extends AdListener {
 
         @Override
         public String getMediationAdapterClassName() {
-            return adView.getMediationAdapterClassName();
+            try {
+                return adView != null ? adView.getMediationAdapterClassName() : "";
+            } catch (Exception e) {
+                return "";
+            }
         }
 
         private Banner(Integer id, AdSize adSize, Activity activity, MethodChannel channel) {
@@ -216,7 +221,11 @@ abstract class MobileAd extends AdListener {
 
         @Override
         public String getMediationAdapterClassName() {
-            return interstitial.getMediationAdapterClassName();
+            try {
+                return interstitial != null && interstitial.isLoaded() ? interstitial.getMediationAdapterClassName() : "";
+            } catch (Exception e) {
+                return "";
+            }
         }
 
         @Override
