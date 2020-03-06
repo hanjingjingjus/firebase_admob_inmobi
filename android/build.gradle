@@ -33,7 +33,7 @@ android {
     }
     dependencies {
         api 'com.google.firebase:firebase-ads:18.1.1'
-        api 'com.google.ads.mediation:inmobi:7.3.0.1'
+        api 'com.google.ads.mediation:inmobi:9.0.2.0'
     }
 }
 
