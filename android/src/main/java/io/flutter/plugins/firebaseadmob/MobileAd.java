@@ -12,8 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.google.ads.mediation.inmobi.rtb.InMobiBannerAd;
-import com.google.ads.mediation.inmobi.rtb.InMobiInterstitialAd;
 import com.google.android.gms.ads.*;
 
 import io.flutter.plugin.common.MethodChannel;
