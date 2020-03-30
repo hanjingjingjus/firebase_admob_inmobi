@@ -9,7 +9,6 @@ import android.util.Log;
 import com.google.ads.mediation.admob.AdMobAdapter;
 import com.google.ads.mediation.inmobi.InMobiAdapter;
 import com.google.android.gms.ads.AdRequest;
-import com.inmobi.ads.InMobiAdRequest;
 
 import java.util.ArrayList;
 import java.util.Date;
