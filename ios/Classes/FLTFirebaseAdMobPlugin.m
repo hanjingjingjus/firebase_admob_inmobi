@@ -9,7 +9,7 @@
 #import "FLTMobileAd.h"
 #import "FLTRewardedVideoAdWrapper.h"
 #import "Firebase/Firebase.h"
-#import "InMobiAdapter/InMobiAdapter.h"
+//#import "InMobiAdapter/InMobiAdapter.h"
 
 @interface FLTFirebaseAdMobPlugin ()
 @property(nonatomic, retain) FlutterMethodChannel *channel;
@@ -52,11 +52,11 @@
   }
   [FLTMobileAd configureWithAppId:appId];
   //optional 欧盟广告协议 加载广告前
-  NSMutableDictionary *consentObject = [[NSMutableDictionary alloc] init];
-  [consentObject setObject:@"1" forKey:@"gdpr"];
-  [consentObject setObject:@"true" forKey:IM_GDPR_CONSENT_AVAILABLE];
-  [GADMInMobiConsent updateGDPRConsent:consentObject];
-  result([NSNumber numberWithBool:YES]);
+//  NSMutableDictionary *consentObject = [[NSMutableDictionary alloc] init];
+//  [consentObject setObject:@"1" forKey:@"gdpr"];
+//  [consentObject setObject:@"true" forKey:IM_GDPR_CONSENT_AVAILABLE];
+//  [GADMInMobiConsent updateGDPRConsent:consentObject];
+//  result([NSNumber numberWithBool:YES]);
 }
 
 - (void)callLoadBannerAdWithId:(NSNumber *)id
